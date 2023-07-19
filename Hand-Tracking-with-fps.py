@@ -12,8 +12,8 @@ hands = mpHands.Hands()
 mpDraw = mp.solutions.drawing_utils
 
 # Prepariamo delle variabili per il calcolo degli FPS
-pTime = 0
-cTime = 0
+previousTime = 0
+currentTime = 0
 
 while True:
     # Leggi l'immagine della webcam
@@ -27,9 +27,9 @@ while True:
             mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
     # Calcola gli FPS
-    cTime = time.time()
-    fps = 1 / (cTime - pTime)
-    pTime = cTime
+    currentTime = time.time()
+    fps = 1 / (currentTime - previousTime)
+    previousTime = currentTime
 
     # Mostra gli FPS su schermo
     cv2.putText(img, 'FPS ' + str(int(fps)), (10, 30),
